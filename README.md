@@ -1,1 +1,5 @@
 # RandomShit
+Public Class randomWords
+{
+
+}
