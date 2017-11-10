@@ -1,0 +1,32 @@
+// Enrique Gómez
+//When running the game, it says errors exist in the main method, but they are not "real errors" so the game runs
+// (They are basically errors because variables aren't used)
+
+
+
+
+import java.util.Scanner;
+public class pigDriver {
+	public static void main (String [] args)
+	{
+		int playAgain;
+		Scanner input = new Scanner(System.in);
+		pigGame newGame = new pigGame("game");//Necessary because the game was originally run in the driver class
+		newGame.play();//Starts a new game
+		System.out.println("Do you wish to play again? Enter \"1\" for yes and \"2\" for no");
+		playAgain = input.nextInt();//Prompts to start a new game
+		for (boolean play = true; play != false;)
+		{
+		if (playAgain == 1)//Starts a new game
+		{
+			newGame.play();
+		}
+		else
+		{
+			System.out.println("OK :'(");
+			play = false;
+		}
+		}
+	}
+
+}
