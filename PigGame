@@ -1,0 +1,197 @@
+//Enrique Gómez
+import java.util.Scanner;
+
+public class pigGame {
+	private String P1;
+	private int score;
+	private int roll;
+	
+	
+	public pigGame(String name)
+	{
+		P1 = name;
+		score = 0;
+	}
+
+	public int getScore()
+	{
+		return score;
+	}
+	
+	public int rollDice()
+	{
+		roll = (int)(Math.random()*6+1);
+		return roll;
+	}
+	public int increaseScore(int increase)
+	{
+		increase = roll;
+		score += increase;
+		return score;
+	}
+	public void turn(int x) //a new roll of dice
+	{
+		System.out.println("rolling dice for "+ P1);
+		x = roll;
+		System.out.println("You rolled a " +x);
+	}
+	public void play() //The whole code for a game
+	{
+		String name1;
+		String name2;
+		int score1 = 0;
+		int score2 = 0;
+		int ammount = 0; 
+		int roll;
+		int rollAgain;
+		System.out.println("Welcome to the Pig Game\nThe goal is to reach 100 points\nOn a turn, a player rolls the die repeatedly until either:\n\tA 1 is rolled\n\tThe player chooses to hold\nIf a 1 is rolled, that player's turn ends and all points are lost.\nIf the player chooses to hold, all of the points rolled during that turn are added to his or her score.\n ");
+		System.out.println("Enter P1: ");
+		Scanner input = new Scanner(System.in);
+		name1 = input.next();
+		
+		pigGame P1 = new pigGame(name1); //Makes player 1
+		
+		System.out.println("Enter P2: ");
+		name2 = input.next();
+		
+		pigGame P2 = new pigGame(name2); //Makes player 2
+			int firstRoll1 = P1.rollDice();
+			int firstRoll2 = P2.rollDice();
+			
+			if ( firstRoll1 > firstRoll2 ) //P1 goes first because they rolled higher
+			{
+				System.out.println(name1 + " rolled a "+ firstRoll1 + " which is higher than "+ name2 + "'s roll( "+ firstRoll2 + "), so "+ name1+" goes first");
+				for (boolean i = true; i != false;)
+				{
+					ammount = 0;
+					for (rollAgain = 1;rollAgain != 2; )//P1 Turn
+					{
+					roll = P1.rollDice();
+					P1.turn(roll);
+					if (roll == 1)
+					{
+						System.out.println("Too bad!");
+						ammount = 0;
+						
+						break;
+					}
+					else
+					{
+					ammount += roll;
+					System.out.println("Do you wish to roll again?(enter \"1\" for yes, \"2\" for no)");
+					rollAgain = input.nextInt();
+					}	
+					}
+					score1 += ammount;
+					ammount = 0;
+					System.out.println("----------------------------------------------------------------------------------------------------------------");
+					
+					for (rollAgain = 1;rollAgain != 2; ) //P2 turn
+					{
+					roll = P2.rollDice();
+					P2.turn(roll);
+					if (roll == 1)
+					{
+						System.out.println("You rolled a 1, too bad");
+						ammount = 0;
+					
+						break;
+					}
+					else
+					{
+					ammount += roll;
+					System.out.println("Do you wish to roll again?(enter \"1\" for yes, \"2\" for no)");
+					rollAgain = input.nextInt();
+					}
+					}
+					score2 += ammount;
+					
+					System.out.println("----------------------------------------------------------------------------------------------------------------");
+					if (score1>99)
+					{
+						System.out.println("****************************************************************************************************************");
+						System.out.println(name1+ " won!");
+						System.out.println("Final score\n"+name1+"'s score: " +score1 +"\n"+name2+"'s score: "+ score2);
+						break;
+					}
+					else if (score2>99)
+					{
+						System.out.println("****************************************************************************************************************");
+					System.out.println(name2+ " won!");
+					System.out.println("Final score\n"+name1+"'s score: " +score1 +"\n"+name2+"'s score: "+ score2);
+					break;
+					}
+					
+					System.out.println(name1+"'s score: " +score1 +"\n"+name2+"'s score: "+ score2);
+					System.out.println("----------------------------------------------------------------------------------------------------------------");
+				}
+			}
+			else //If P2 rolled higher to start the game
+			{
+				System.out.println(name2 + " rolled a "+ firstRoll2 + " which is higher than " +name1 +"'s roll( "+ firstRoll1 +"), so " +name2+ " goes first" );
+				for (boolean i = true; i != false;)
+				{
+					ammount = 0;
+					for (rollAgain = 1;rollAgain != 2; )//P2 turn
+					{
+					roll = P2.rollDice();
+					P2.turn(roll);
+					if (roll == 1)
+					{
+						System.out.println("You rolled a 1, too bad");
+						ammount = 0;
+						
+						break;
+					}
+					else
+					{
+					ammount += roll;
+					System.out.println("Do you wish to roll again?(enter \"1\" for yes, \"2\" for no)");
+					rollAgain = input.nextInt();
+					}	
+					}
+					score2 += ammount;
+					ammount = 0;
+					System.out.println("----------------------------------------------------------------------------------------------------------------");
+					for (rollAgain = 1;rollAgain != 2; )//P1 Turn
+					{
+					roll = P1.rollDice();
+					P1.turn(roll);
+					if (roll == 1)
+					{
+						System.out.println("Too bad!");
+						ammount = 0;
+						
+						break;
+					}
+					else
+					{
+					ammount += roll;
+					System.out.println("Do you wish to roll again?(enter \"1\" for yes, \"2\" for no)");
+					rollAgain = input.nextInt();
+					}
+					}
+					score1 += ammount;
+					System.out.println("----------------------------------------------------------------------------------------------------------------");
+					if (score1>99)
+					{
+						System.out.println("****************************************************************************************************************");
+						System.out.println(name1+ " won!");
+						System.out.println("Final score\n"+name1+"'s score: " +score1 +"\n"+name2+"'s score: "+ score2);
+						break;
+					}
+					else if (score2>99)
+					{
+						System.out.println("****************************************************************************************************************");
+					System.out.println(name2+ " won!");
+					System.out.println("Final score\n"+name1+"'s score: " +score1 +"\n"+name2+"'s score: "+ score2);
+					break;
+					}
+					
+					System.out.println(name1+"'s score: " +score1 +"\n"+name2+"'s score: "+ score2);
+					System.out.println("----------------------------------------------------------------------------------------------------------------");
+				}
+			}
+			
+	}
+}
